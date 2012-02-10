@@ -36,6 +36,28 @@
         var dataExport = false;
         var fugafuga = [];
 
+        function _getUniqueData(clothData){
+            var correctData = new Array();
+            var flg = 1;
+            var len = clothData.length;
+
+            for(var i = 0; i < len; i++){
+                for(var j = i + 1; j < len; j++){
+                    if((clothData[i].name === clothData[j].name) && (clothData[i].data === clothData[j].data)){
+                        flg = 9;
+                        break;
+                    }
+                }
+                if (flg ===1){
+                    correctData.push(clothData[i]);
+                }
+                flg = 1;
+            }
+            return correctData;
+        }
+
+
+
 //console.log(clothes);
 
         clothes.find ({}, function(err, docs) {
@@ -51,6 +73,9 @@
                     }
                 }
             }
+
+            clothData = _getUniqueData(clothData);
+
         });
 
 
